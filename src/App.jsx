@@ -20,7 +20,7 @@ export default function App() {
   const [steps, setSteps] = useState([]);
   const [i, setI] = useState(0);
 const [intervalId, setIntervalId] = useState(null);
-const [speed, setSpeed] = useState(2000); // default speed
+const [speed, setSpeed] = useState(2000);
 const [algorithm, setAlgorithm] = useState("merge");
 
 const start = () => {
@@ -65,13 +65,11 @@ const startAutoPlay = (stepsData, startIndex) => {
 const play = () => {
   if (intervalId) return;
 
-  // 🔥 If no steps, generate first
   if (steps.length === 0) {
     const s = mergeSortSteps([...array]);
     setSteps(s);
     setI(0);
 
-    // wait a bit before starting animation
     setTimeout(() => startAutoPlay(s, 0), 100);
   } else {
     startAutoPlay(steps, i);
@@ -112,7 +110,7 @@ sidebar={
       setI(0);
     }}
     setAlgorithm={setAlgorithm}
-    algorithm={algorithm}   // 🔥 ADD THIS
+    algorithm={algorithm}  
   />
 }
       

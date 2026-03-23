@@ -2,50 +2,56 @@
   display: flex;
   gap: 12px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .box {
   width: 55px;
   height: 55px;
-  border-radius: 8px;
-  border: 2px solid orange;
+  border-radius: 10px;
+  border: 2px solid #334155;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
 
-  /* 🔥 BACK TO COLORFUL LOOK */
-  background: #1e293b;
-  color: white;
-  box-shadow: 0 0 10px rgba(255, 165, 0, 0.4);
+  background: #0f172a;  
+  color: #e2e8f0;
 
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
-/* 🔥 ACTIVE (MAIN FOCUS) */
-.box.active {
-  background: yellow;
-  color: black;
-}
-
+.box.active,
 .box.compare {
-  background: yellow;
-}
-
-.box.merge {
-  background: purple;
-}
-
-.box.sorted {
-  background: green;
+  background: #facc15;
+  color: black;
+  box-shadow: 0 0 12px #facc15;
+  transform: scale(1.1);
 }
 
 .box.swap {
-  background: red;
+  background: #ef4444;
   color: white;
+  box-shadow: 0 0 12px #ef4444;
+  transform: scale(1.1);
 }
 
-.box.found {
-  background: green;
+.box.merge {
+  background: #a855f7;
   color: white;
+  box-shadow: 0 0 12px #a855f7;
+}
+
+.box.sorted,
+.box.found {
+  background: #22c55e;
+  color: white;
+  box-shadow: 0 0 12px #22c55e;
+}
+
+.box.pivot {
+  background: #38bdf8;
+  color: black;
+  box-shadow: 0 0 12px #38bdf8;
 }

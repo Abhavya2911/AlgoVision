@@ -4,7 +4,6 @@
   margin-top: 20px;
 }
 
-/* Node container */
 .tree-node-container {
   display: flex;
   flex-direction: column;
@@ -12,7 +11,6 @@
   position: relative;
 }
 
-/* Actual node */
 .tree-node {
   padding: 8px 14px;
   border-radius: 10px;
@@ -23,7 +21,6 @@
   transition: all 0.3s ease;
 }
 
-/* Children container */
 .children {
   display: flex;
   justify-content: space-between;
@@ -31,7 +28,6 @@
   position: relative;
 }
 
-/* Draw horizontal line */
 .children::before {
   content: "";
   position: absolute;
@@ -42,7 +38,6 @@
   background: white;
 }
 
-/* Each child */
 .child {
   display: flex;
   justify-content: center;
@@ -50,7 +45,6 @@
   position: relative;
 }
 
-/* Draw vertical lines */
 .child::before {
   content: "";
   position: absolute;

@@ -22,7 +22,7 @@ export default function ArrayVisualizer({ array = [], active = [], stepType }) {
         className += " swap";
       } 
       else if (stepType === "pivot") {
-        className += " active";
+        className += " pivot";
       }
       else if (stepType === "found") {
   className += " found";

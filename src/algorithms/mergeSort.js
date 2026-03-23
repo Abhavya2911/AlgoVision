@@ -1,14 +1,13 @@
 export function mergeSortSteps(arr) {
   let steps = [];
   let comparisons = 0;
-  // ✅ STEP 1: Build recursion tree FIRST
 let nodeId = 0;
 
 function buildTree(a, l, r) {
   if (l > r) return null;
 
   const node = {
-    id: nodeId++,   // 🔥 UNIQUE ID
+    id: nodeId++,   
     value: a.slice(l, r + 1),
     left: null,
     right: null
@@ -26,19 +25,16 @@ function buildTree(a, l, r) {
 
   const treeRoot = buildTree(arr, 0, arr.length - 1);
 
-  // ✅ STEP 2: Push initial tree
   steps.push({
     type: "tree",
     tree: treeRoot,
     message: "This is the full recursion tree of Merge Sort"
   });
 
-  // ✅ STEP 3: Merge sort steps (NO tree array here)
 function mergeSort(a, l, r, node) {
-  // 🔥 STOP if node missing
+
   if (l >= r || !node) return;
 
-  // 🔥 SAFE node usage
   steps.push({
     type: "tree",
     tree: treeRoot,
@@ -48,7 +44,6 @@ function mergeSort(a, l, r, node) {
 
   let mid = Math.floor((l + r) / 2);
 
-  // 🔥 ONLY call if child exists
   if (node.left) {
     mergeSort(a, l, mid, node.left);
   }
@@ -57,7 +52,6 @@ function mergeSort(a, l, r, node) {
     mergeSort(a, mid + 1, r, node.right);
   }
 
-  // 🔥 Array step before merge
   steps.push({
     type: "array",
     array: [...a],

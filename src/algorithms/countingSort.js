@@ -4,7 +4,6 @@ export function countingSortSteps(arr) {
 
   let count = new Array(max + 1).fill(0);
 
-  // count frequency
   for (let i = 0; i < arr.length; i++) {
     count[arr[i]]++;
 
@@ -16,7 +15,6 @@ export function countingSortSteps(arr) {
     });
   }
 
-  // rebuild array
   let sorted = [];
   for (let i = 0; i < count.length; i++) {
     while (count[i] > 0) {
