@@ -22,23 +22,32 @@ export default function ArrayVisualizer({ array = [], active = [], stepType, ran
           }
 
           // 🔥 ACTIVE LOGIC
-          if (isActive) {
-            if (stepType === "compare") {
-              className += " active";
-            } 
-            else if (stepType === "merge") {
-              className += " active";
-            } 
-            else if (stepType === "swap") {
-              className += " swap";
-            } 
-            else if (stepType === "pivot") {
-              className += " pivot";
-            }
-            else if (stepType === "found") {
-              className += " found";
-            }
-          }
+         if (isActive) {
+  switch (stepType) {
+    case "compare":
+      className += " active";
+      break;
+
+    case "merge":
+      className += " merge";   // 🔥 FIXED
+      break;
+
+    case "swap":
+      className += " swap";
+      break;
+
+    case "pivot":
+      className += " pivot";
+      break;
+
+    case "found":
+      className += " found";
+      break;
+
+    default:
+      className += " active";
+  }
+}
 
           return (
             <div

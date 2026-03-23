@@ -37,7 +37,7 @@ export function binarySearchSteps(arr, target) {
   array: [...a],
   active: [mid],
   range: [l, r],
-  message: `Searching between ${l} and ${r}`
+  message: `Searching between index ${l} and index ${r}`
 });
     } else {
       r = mid - 1;
@@ -46,7 +46,7 @@ export function binarySearchSteps(arr, target) {
   array: [...a],
   active: [mid],
   range: [l, r],
-  message: `Searching between ${l} and ${r}`
+  message: `Searching between index ${l} and index ${r}`
 });
     }
   }

@@ -23,6 +23,16 @@ export function linearSearchSteps(arr, target) {
       });
       break;
     }
+
+        if (i===arr.length-1 && arr[i]!==target) {
+      steps.push({
+        type: "found",
+        array: [...arr],
+        active: [i],
+        message: `Not Found ${target} in the array`
+      });
+      break;
+    }
   }
 
   return steps;

@@ -21,11 +21,11 @@ export default function Controls({
         <label>Speed: </label>
         <input
           type="range"
-          min="100"
-          max="1500"
+          min="1500"
+          max="3000"
           step="100"
           value={speed}
-          onChange={(e) => setSpeed(3400-Number(e.target.value))}
+          onChange={(e) => setSpeed(Number(e.target.value))}
         />
       </div>
     </div>
