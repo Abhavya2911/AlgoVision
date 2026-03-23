@@ -1,4 +1,4 @@
-export default function MetricsPanel({ metrics, algorithm }) {
+export default function MetricsPanel({ metrics, algorithm, complexity }) {
   
   const complexityData = {
   merge: {
@@ -44,7 +44,7 @@ export default function MetricsPanel({ metrics, algorithm }) {
 
       <div style={boxStyle}>
         <p>Time</p>
-        <strong>{current.time}</strong>
+        <strong>{complexity}</strong>
       </div>
 
       <div style={boxStyle}>

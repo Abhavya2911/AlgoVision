@@ -1,4 +1,4 @@
-export default function PseudocodePanel({ algorithm }) {
+export default function PseudocodePanel({ algorithm, stepType }) {
 
   const data = {
 
@@ -48,11 +48,57 @@ export default function PseudocodePanel({ algorithm }) {
     <div>
       <h3>Pseudocode</h3>
 
-      {code.map((line, i) => (
-        <div key={i} style={{ padding: "4px" }}>
-          {line}
-        </div>
-      ))}
+      {code.map((line, i) => {
+
+        let highlight = false;
+
+        // 🔥 MERGE SORT
+        if (algorithm === "merge") {
+          if (stepType === "split" && i === 1) highlight = true;
+          if (stepType === "compare" && i === 4) highlight = true;
+          if (stepType === "merge" && i === 4) highlight = true;
+        }
+
+        // 🔥 QUICK SORT
+        if (algorithm === "quick") {
+          if (stepType === "pivot" && i === 0) highlight = true;
+          if (stepType === "compare" && i === 1) highlight = true;
+          if (stepType === "swap" && i === 2) highlight = true;
+        }
+
+        // 🔥 LINEAR SEARCH
+        if (algorithm === "linear") {
+          if (stepType === "compare" && i === 1) highlight = true;
+          if (stepType === "found" && i === 2) highlight = true;
+        }
+
+        // 🔥 BINARY SEARCH
+        if (algorithm === "binary") {
+          if (stepType === "compare" && i === 2) highlight = true;
+        }
+
+        // 🔥 COUNTING SORT
+        if (algorithm === "counting") {
+          if (stepType === "count" && i === 2) highlight = true;
+          if (stepType === "rebuild" && i === 3) highlight = true;
+        }
+
+        return (
+          <div
+            key={i}
+            style={{
+              padding: "6px",
+              margin: "2px 0",
+              borderRadius: "5px",
+              background: highlight ? "#334155" : "transparent",
+              color: highlight ? "#facc15" : "#e2e8f0",
+              transition: "0.2s"
+            }}
+          >
+            {line}
+          </div>
+        );
+      })}
     </div>
   );
 }

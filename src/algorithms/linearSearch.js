@@ -9,7 +9,8 @@ export function linearSearchSteps(arr, target) {
       type: "compare",
       array: [...arr],
       active: [i],
-      message: `Checking ${arr[i]}`,
+      range: [0,i],
+      message: `Checking index${i}`,
       metrics: { comparisons }
     });
 

@@ -14,6 +14,7 @@ export function binarySearchSteps(arr, target) {
       type: "compare",
       array: [...a],
       active: [mid],
+      range:[l,r],
       message: `Checking middle ${a[mid]}`,
       metrics: { comparisons }
     });
@@ -23,6 +24,7 @@ export function binarySearchSteps(arr, target) {
         type: "found",
         array: [...a],
         active: [mid],
+        range: [l,r],
         message: `Found ${target}`
       });
       break;
@@ -30,8 +32,22 @@ export function binarySearchSteps(arr, target) {
 
     else if (a[mid] < target) {
       l = mid + 1;
+      steps.push({
+  type: "range",
+  array: [...a],
+  active: [mid],
+  range: [l, r],
+  message: `Searching between ${l} and ${r}`
+});
     } else {
       r = mid - 1;
+      steps.push({
+  type: "range",
+  array: [...a],
+  active: [mid],
+  range: [l, r],
+  message: `Searching between ${l} and ${r}`
+});
     }
   }
 

@@ -13,7 +13,7 @@ import { quickSortSteps } from "./algorithms/quickSort";
 import { linearSearchSteps } from "./algorithms/linearSearch";
 import { binarySearchSteps } from "./algorithms/binarySearch";
 import { countingSortSteps } from "./algorithms/countingSort";
-
+import ColorLegend from "./components/ColorLegend";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -22,29 +22,31 @@ export default function App() {
 const [intervalId, setIntervalId] = useState(null);
 const [speed, setSpeed] = useState(2000);
 const [algorithm, setAlgorithm] = useState("merge");
+const [complexity, setComplexity] = useState("");
 
 const start = () => {
-  let s = [];
+  let result = { steps: [], complexity: "" };
 
   if (algorithm === "merge") {
-    s = mergeSortSteps([...array]);
+    result = { steps: mergeSortSteps([...array]), complexity: "O(n log n)" };
   } 
   else if (algorithm === "quick") {
-    s = quickSortSteps([...array]);
+    result = quickSortSteps([...array]);
   }
   else if (algorithm === "linear") {
     const target = Number(prompt("Enter target"));
-    s = linearSearchSteps([...array], target);
+    result = { steps: linearSearchSteps([...array], target), complexity: "O(n)" };
   }
   else if (algorithm === "binary") {
     const target = Number(prompt("Enter target"));
-    s = binarySearchSteps([...array], target);
+    result = { steps: binarySearchSteps([...array], target), complexity: "O(log n)" };
   }
   else if (algorithm === "counting") {
-    s = countingSortSteps([...array]);
+    result = { steps: countingSortSteps([...array]), complexity: "O(n + k)" };
   }
 
-  setSteps(s);
+  setSteps(result.steps);
+  setComplexity(result.complexity);
   setI(0);
 };
 
@@ -97,7 +99,7 @@ const next = () => {
 const safeArray = step.array || array;
 const safeActive = step.active || [];
 
-const metrics = step.metrics || {};
+const metrics = step?.metrics || {};
 
   return (
     <MainLayout
@@ -165,8 +167,13 @@ center={
 
  right={
   <>
-    <MetricsPanel metrics={metrics} algorithm={algorithm} />
-<PseudocodePanel algorithm={algorithm} />
+    <MetricsPanel 
+  metrics={metrics} 
+  algorithm={algorithm} 
+  complexity={complexity}
+/>
+    <PseudocodePanel algorithm={algorithm} stepType={step.type} />
+    <ColorLegend />
   </>
 }
       
