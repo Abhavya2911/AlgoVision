@@ -3,10 +3,8 @@ import MainLayout from "./layouts/MainLayout";
 import Sidebar from "./components/Sidebar";
 import ArrayVisualizer from "./components/ArrayVisualizer";
 import Controls from "./components/Controls";
-import ExplanationPanel from "./components/ExplanationPanel";
 import RecursionTree from "./components/RecursionTree"; 
 import { mergeSortSteps } from "./algorithms/mergeSort";
-import InputPanel from "./components/InputPanel";
 import MetricsPanel from "./components/MetricsPanel";
 import PseudocodePanel from "./components/PseudocodePanel";
 import { quickSortSteps } from "./algorithms/quickSort";
@@ -14,6 +12,7 @@ import { linearSearchSteps } from "./algorithms/linearSearch";
 import { binarySearchSteps } from "./algorithms/binarySearch";
 import { countingSortSteps } from "./algorithms/countingSort";
 import ColorLegend from "./components/ColorLegend";
+import GraphVisualizer from "./components/GraphVisualizer";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -23,6 +22,14 @@ const [intervalId, setIntervalId] = useState(null);
 const [speed, setSpeed] = useState(2000);
 const [algorithm, setAlgorithm] = useState("merge");
 const [complexity, setComplexity] = useState("");
+const graph = {
+  A: ["B", "C"],
+  B: ["D", "E"],
+  C: ["F"],
+  D: [],
+  E: ["F"],
+  F: []
+};
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -44,6 +51,12 @@ const start = () => {
   else if (algorithm === "counting") {
     result = { steps: countingSortSteps([...array]), complexity: "O(n + k)" };
   }
+  else if (algorithm === "bfs") {
+  result = { steps: bfsSteps(graph, "A"), complexity: "O(V + E)" };
+}
+else if (algorithm === "dfs") {
+  result = { steps: dfsSteps(graph, "A"), complexity: "O(V + E)" };
+}
 
   setSteps(result.steps);
   setComplexity(result.complexity);
@@ -124,7 +137,7 @@ center={
     width: "100%"
   }}>
 
-    {/* STEP MESSAGE */}
+   
     <div style={{
       marginBottom: "20px",
       padding: "10px 20px",
@@ -134,8 +147,7 @@ center={
     }}>
       {step.message || "Click Start"}
     </div>
-
-    {/* 🔥 CONDITIONAL LAYOUT */}
+    
     {algorithm === "merge" ? (
       <div style={{
         display: "flex",
@@ -143,13 +155,10 @@ center={
         width: "100%",
         justifyContent: "space-around"
       }}>
-        {/* TREE */}
         <RecursionTree
           tree={steps[0]?.tree}
           activeNode={step.activeNode}
         />
-
-        {/* ARRAY */}
         <ArrayVisualizer
           array={safeArray}
           active={safeActive}
@@ -161,6 +170,9 @@ center={
         active={safeActive}
       />
     )}
+    {(algorithm === "bfs" || algorithm === "dfs") && (
+  <GraphVisualizer step={step} />
+)}
 
   </div>
 }

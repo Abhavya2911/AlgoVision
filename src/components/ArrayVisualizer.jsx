@@ -8,20 +8,15 @@ export default function ArrayVisualizer({ array = [], active = [], stepType, ran
       ) : (
         array.map((val, i) => {
           const isActive = active?.includes(i);
-
-          // 🔥 RANGE LOGIC (NEW)
           const inRange = range
             ? i >= range[0] && i <= range[1]
             : false;
 
           let className = "box";
-
-          // 🔥 RANGE STYLE (light highlight)
           if (inRange) {
             className += " range";
           }
 
-          // 🔥 ACTIVE LOGIC
          if (isActive) {
   switch (stepType) {
     case "compare":
@@ -29,7 +24,7 @@ export default function ArrayVisualizer({ array = [], active = [], stepType, ran
       break;
 
     case "merge":
-      className += " merge";   // 🔥 FIXED
+      className += " merge";  
       break;
 
     case "swap":
@@ -48,7 +43,6 @@ export default function ArrayVisualizer({ array = [], active = [], stepType, ran
       className += " active";
   }
 }
-
           return (
             <div
               key={i}
