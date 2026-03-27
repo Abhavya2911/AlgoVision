@@ -52,32 +52,27 @@ export default function PseudocodePanel({ algorithm, stepType }) {
 
         let highlight = false;
 
-        // 🔥 MERGE SORT
         if (algorithm === "merge") {
           if (stepType === "split" && i === 1) highlight = true;
           if (stepType === "compare" && i === 4) highlight = true;
           if (stepType === "merge" && i === 4) highlight = true;
         }
 
-        // 🔥 QUICK SORT
         if (algorithm === "quick") {
           if (stepType === "pivot" && i === 0) highlight = true;
           if (stepType === "compare" && i === 1) highlight = true;
           if (stepType === "swap" && i === 2) highlight = true;
         }
 
-        // 🔥 LINEAR SEARCH
         if (algorithm === "linear") {
           if (stepType === "compare" && i === 1) highlight = true;
           if (stepType === "found" && i === 2) highlight = true;
         }
 
-        // 🔥 BINARY SEARCH
         if (algorithm === "binary") {
           if (stepType === "compare" && i === 2) highlight = true;
         }
 
-        // 🔥 COUNTING SORT
         if (algorithm === "counting") {
           if (stepType === "count" && i === 2) highlight = true;
           if (stepType === "rebuild" && i === 3) highlight = true;

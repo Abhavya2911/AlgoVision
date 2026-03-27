@@ -5,7 +5,6 @@ export default function Sidebar({ setArray, setAlgorithm ,algorithm}) {
     <div>
       <h2>DAA Visualizer</h2>
 
-      {/* INPUT */}
       <InputPanel setArray={setArray} />
 
       <hr />

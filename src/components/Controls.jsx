@@ -16,7 +16,6 @@ export default function Controls({
       <button onClick={pause}>Pause</button>
       <button onClick={reset}>Reset</button>
 
-      {/* 🔥 SPEED SLIDER */}
       <div style={{ marginTop: "10px" }}>
         <label>Speed: </label>
         <input

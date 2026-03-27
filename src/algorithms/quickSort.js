@@ -23,7 +23,6 @@ export function quickSortSteps(arr) {
   function partition(a, low, high) {
     let pivot = a[high];
 
-    // 🔥 Pivot step WITH metrics
     steps.push({
       type: "pivot",
       array: [...a],
@@ -37,7 +36,6 @@ export function quickSortSteps(arr) {
     for (let j = low; j < high; j++) {
       comparisons++;
 
-      // 🔥 Compare step
       steps.push({
         type: "compare",
         array: [...a],
@@ -50,7 +48,6 @@ export function quickSortSteps(arr) {
         [a[i], a[j]] = [a[j], a[i]];
         swaps++;
 
-        // 🔥 Swap step
         steps.push({
           type: "swap",
           array: [...a],
@@ -63,7 +60,6 @@ export function quickSortSteps(arr) {
       }
     }
 
-    // 🔥 Final pivot placement swap
     [a[i], a[high]] = [a[high], a[i]];
     swaps++;
 
