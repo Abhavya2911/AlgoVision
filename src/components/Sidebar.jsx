@@ -1,11 +1,16 @@
 import InputPanel from "./InputPanel";
+import GraphInput from "./GraphInput";
 
-export default function Sidebar({ setArray, setAlgorithm ,algorithm}) {
+export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode }) {
   return (
     <div>
       <h2>DAA Visualizer</h2>
 
-      <InputPanel setArray={setArray} />
+      {algorithm === "bfs" || algorithm === "dfs" ? (
+  <GraphInput setGraph={setGraph} setStartNode={setStartNode} />
+) : (
+  <InputPanel setArray={setArray} />
+)}
 
       <hr />
 

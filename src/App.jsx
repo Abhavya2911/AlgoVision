@@ -22,14 +22,9 @@ const [intervalId, setIntervalId] = useState(null);
 const [speed, setSpeed] = useState(2000);
 const [algorithm, setAlgorithm] = useState("merge");
 const [complexity, setComplexity] = useState("");
-const graph = {
-  A: ["B", "C"],
-  B: ["D", "E"],
-  C: ["F"],
-  D: [],
-  E: ["F"],
-  F: []
-};
+const [graph, setGraph] = useState({});
+const [startNode, setStartNode] = useState("");
+
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -52,11 +47,19 @@ const start = () => {
     result = { steps: countingSortSteps([...array]), complexity: "O(n + k)" };
   }
   else if (algorithm === "bfs") {
-  result = { steps: bfsSteps(graph, "A"), complexity: "O(V + E)" };
-}
-else if (algorithm === "dfs") {
-  result = { steps: dfsSteps(graph, "A"), complexity: "O(V + E)" };
-}
+    if (!graph || !startNode) {
+      alert("Please build graph first!");
+      return;
+    }
+    result = { steps: bfsSteps(graph, startNode), complexity: "O(V + E)" };
+  }
+  else if (algorithm === "dfs") {
+    if (!graph || !startNode) {
+      alert("Please build graph first!");
+      return;
+    }
+    result = { steps: dfsSteps(graph, startNode), complexity: "O(V + E)" };
+  }
 
   setSteps(result.steps);
   setComplexity(result.complexity);
@@ -119,14 +122,12 @@ const metrics = step?.metrics || {};
     
 sidebar={
   <Sidebar
-    setArray={(arr) => {
-      setArray(arr);
-      setSteps([]);
-      setI(0);
-    }}
-    setAlgorithm={setAlgorithm}
-    algorithm={algorithm}  
-  />
+  setArray={setArray}
+  setAlgorithm={setAlgorithm}
+  algorithm={algorithm}
+  setGraph={setGraph}
+  setStartNode={setStartNode}
+/>
 }
       
 center={
