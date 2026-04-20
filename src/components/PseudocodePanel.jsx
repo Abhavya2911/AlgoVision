@@ -38,7 +38,25 @@ export default function PseudocodePanel({ algorithm, stepType }) {
       "create count array",
       "store frequency",
       "rebuild sorted array"
-    ]
+    ],
+
+    bfs: [
+  "create queue",
+  "mark start visited",
+  "enqueue start node",
+  "while queue not empty",
+  "dequeue node",
+  "visit neighbors",
+  "enqueue unvisited neighbors"
+],
+
+dfs: [
+  "start from node",
+  "mark visited",
+  "go to first neighbor",
+  "repeat recursively",
+  "backtrack when no neighbor"
+]
 
   };
 
@@ -77,6 +95,15 @@ export default function PseudocodePanel({ algorithm, stepType }) {
           if (stepType === "count" && i === 2) highlight = true;
           if (stepType === "rebuild" && i === 3) highlight = true;
         }
+
+        if (algorithm === "bfs") {
+  if (stepType === "enqueue" && i === 2) highlight = true;
+  if (stepType === "visit" && i === 4) highlight = true;
+}
+
+       if (algorithm === "dfs") {
+  if (stepType === "visit" && i === 1) highlight = true;
+}
 
         return (
           <div

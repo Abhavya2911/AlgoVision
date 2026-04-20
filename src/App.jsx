@@ -13,6 +13,8 @@ import { binarySearchSteps } from "./algorithms/binarySearch";
 import { countingSortSteps } from "./algorithms/countingSort";
 import ColorLegend from "./components/ColorLegend";
 import GraphVisualizer from "./components/GraphVisualizer";
+import { bfsSteps } from "./algorithms/bfs";
+import { dfsSteps } from "./algorithms/dfs";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -24,7 +26,7 @@ const [algorithm, setAlgorithm] = useState("merge");
 const [complexity, setComplexity] = useState("");
 const [graph, setGraph] = useState({});
 const [startNode, setStartNode] = useState("");
-
+const [isDirected, setIsDirected] = useState(false);
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -47,23 +49,34 @@ const start = () => {
     result = { steps: countingSortSteps([...array]), complexity: "O(n + k)" };
   }
   else if (algorithm === "bfs") {
-    if (!graph || !startNode) {
-      alert("Please build graph first!");
-      return;
-    }
-    result = { steps: bfsSteps(graph, startNode), complexity: "O(V + E)" };
+  if (!graph || Object.keys(graph).length === 0 || !startNode) {
+    alert("Please build graph first!");
+    return;
   }
-  else if (algorithm === "dfs") {
-    if (!graph || !startNode) {
-      alert("Please build graph first!");
-      return;
-    }
-    result = { steps: dfsSteps(graph, startNode), complexity: "O(V + E)" };
+
+  result = {
+    steps: bfsSteps(graph, startNode),
+    complexity: "O(V + E)"
+  };
+}
+
+else if (algorithm === "dfs") {
+  if (!graph || Object.keys(graph).length === 0 || !startNode) {
+    alert("Please build graph first!");
+    return;
   }
+
+  result = {
+    steps: dfsSteps(graph, startNode),
+    complexity: "O(V + E)"
+  };
+}
 
   setSteps(result.steps);
   setComplexity(result.complexity);
   setI(0);
+
+  return result.steps;
 };
 
 const startAutoPlay = (stepsData, startIndex) => {
@@ -83,15 +96,19 @@ const startAutoPlay = (stepsData, startIndex) => {
 const play = () => {
   if (intervalId) return;
 
-  if (steps.length === 0) {
-    const s = mergeSortSteps([...array]);
-    setSteps(s);
-    setI(0);
+  if (!steps || steps.length === 0) {
+    const newSteps = start();
 
-    setTimeout(() => startAutoPlay(s, 0), 100);
-  } else {
-    startAutoPlay(steps, i);
+    if (!newSteps || newSteps.length === 0) return;
+
+    setTimeout(() => {
+      startAutoPlay(newSteps, 0);
+    }, 100);
+
+    return;
   }
+
+  startAutoPlay(steps, i);
 };
 
 const pause = () => {
@@ -121,12 +138,13 @@ const metrics = step?.metrics || {};
     <MainLayout
     
 sidebar={
-  <Sidebar
+<Sidebar
   setArray={setArray}
   setAlgorithm={setAlgorithm}
   algorithm={algorithm}
   setGraph={setGraph}
   setStartNode={setStartNode}
+  setDirectedGraph={setIsDirected}   // 🔥 FIX
 />
 }
       
@@ -150,30 +168,34 @@ center={
     </div>
     
     {algorithm === "merge" ? (
-      <div style={{
-        display: "flex",
-        gap: "40px",
-        width: "100%",
-        justifyContent: "space-around"
-      }}>
-        <RecursionTree
-          tree={steps[0]?.tree}
-          activeNode={step.activeNode}
-        />
-        <ArrayVisualizer
-          array={safeArray}
-          active={safeActive}
-        />
-      </div>
-    ) : (
-      <ArrayVisualizer
-        array={safeArray}
-        active={safeActive}
-      />
-    )}
-    {(algorithm === "bfs" || algorithm === "dfs") && (
-  <GraphVisualizer step={step} />
+  <div style={{
+    display: "flex",
+    gap: "40px",
+    width: "100%",
+    justifyContent: "space-around"
+  }}>
+    <RecursionTree
+      tree={steps[0]?.tree}
+      activeNode={step.activeNode}
+    />
+    <ArrayVisualizer
+      array={safeArray}
+      active={safeActive}
+      stepType={step.type}
+      range={step.range}
+    />
+  </div>
+) : (algorithm === "bfs" || algorithm === "dfs") ? (
+  <GraphVisualizer step={step} graph={graph} directed={isDirected}/>
+) : (
+  <ArrayVisualizer
+    array={safeArray}
+    active={safeActive}
+    stepType={step.type}
+    range={step.range}
+  />
 )}
+  
 
   </div>
 }

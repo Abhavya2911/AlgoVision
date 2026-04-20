@@ -10,6 +10,8 @@ export function dfsSteps(graph, start) {
       node,
       stack: [...stack, node],
       visited: [...visited],
+
+      graph,
       message: `Visiting ${node}`
     });
 

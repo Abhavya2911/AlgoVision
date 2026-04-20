@@ -13,6 +13,7 @@ export function bfsSteps(graph, start) {
       node,
       queue: [...queue],
       visited: [...visited],
+      graph,
       message: `Visiting ${node}`
     });
 
@@ -26,6 +27,7 @@ export function bfsSteps(graph, start) {
           node: neighbor,
           queue: [...queue],
           visited: [...visited],
+          graph,
           message: `Adding ${neighbor} to queue`
         });
       }

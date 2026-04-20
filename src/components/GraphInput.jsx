@@ -1,58 +1,112 @@
 import { useState } from "react";
 
-export default function GraphInput({ setGraph, setStartNode }) {
+export default function GraphInput({ setGraph, setStartNode, setDirectedGraph }) {
   const [edges, setEdges] = useState("");
-  const [directed, setDirected] = useState(false);
   const [start, setStart] = useState("");
+  const [directed, setDirected] = useState(false);
 
   const buildGraph = () => {
-    const graph = {};
+    const g = {};
 
     const edgeList = edges.split(",");
 
-    edgeList.forEach(edge => {
+    edgeList.forEach((edge) => {
+      if (!edge.includes("-")) return;
+
       const [u, v] = edge.trim().split("-");
 
-      if (!graph[u]) graph[u] = [];
-      if (!graph[v]) graph[v] = [];
+      if (!u || !v) return;
 
-      graph[u].push(v);
+      if (!g[u]) g[u] = [];
+      if (!g[v]) g[v] = [];
+
+      g[u].push(v);
 
       if (!directed) {
-        graph[v].push(u);
+        g[v].push(u);
       }
     });
 
-    setGraph(graph);
-    setStartNode(start);
+    console.log("GRAPH:", g);
+
+    setGraph(g);
+    setDirectedGraph(directed);
+    setStartNode(start.trim());
+
+    alert("Graph built successfully ✅");
   };
 
   return (
-    <div>
-      <h4>Graph Input</h4>
+    <div style={{ marginTop: "20px" }}>
+      <h3>Graph Input</h3>
 
+      {/* EDGES INPUT */}
       <input
-        placeholder="Edges (A-B, A-C)"
+        type="text"
+        placeholder="Edges (A-B, A-C, B-D)"
         value={edges}
         onChange={(e) => setEdges(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "8px",
+          marginBottom: "10px",
+          borderRadius: "6px",
+          border: "1px solid #444",
+          background: "#111",
+          color: "white"
+        }}
       />
 
+      {/* START NODE */}
       <input
-        placeholder="Start Node"
+        type="text"
+        placeholder="Start Node (A)"
         value={start}
         onChange={(e) => setStart(e.target.value)}
+        style={{
+          width: "100%",
+          padding: "8px",
+          marginBottom: "10px",
+          borderRadius: "6px",
+          border: "1px solid #444",
+          background: "#111",
+          color: "white"
+        }}
       />
 
-      <label>
-        <input
-          type="checkbox"
-          checked={directed}
-          onChange={() => setDirected(!directed)}
-        />
-        Directed
-      </label>
+      {/* DIRECTED BUTTON */}
+      <button
+        onClick={() => setDirected(!directed)}
+        style={{
+          width: "100%",
+          padding: "8px",
+          borderRadius: "6px",
+          border: "none",
+          cursor: "pointer",
+          background: directed ? "#38bdf8" : "#333",
+          color: "white",
+          marginBottom: "10px"
+        }}
+      >
+        {directed ? "Directed Graph" : "Undirected Graph"}
+      </button>
 
-      <button onClick={buildGraph}>Build Graph</button>
+      {/* BUILD BUTTON */}
+      <button
+        onClick={buildGraph}
+        style={{
+          width: "100%",
+          padding: "10px",
+          borderRadius: "6px",
+          border: "none",
+          cursor: "pointer",
+          background: "orange",
+          color: "black",
+          fontWeight: "bold"
+        }}
+      >
+        Build Graph
+      </button>
     </div>
   );
 }
