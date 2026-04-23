@@ -66,6 +66,16 @@ knapsack: [
   "take max(include, exclude)",
   "else copy above value",
   "final answer dp[n][W]"
+],
+
+nqueens: [
+  "start from row 0",
+  "try placing queen in each column",
+  "check if safe",
+  "place queen",
+  "recurse to next row",
+  "if fails → backtrack",
+  "repeat until solution"
 ]
 
   };
@@ -119,6 +129,12 @@ knapsack: [
   if (stepType === "choice" && i === 4) highlight = true;
   if (stepType === "skip" && i === 5) highlight = true;
   if (stepType === "result" && i === 6) highlight = true;
+}
+
+if (algorithm === "nqueens") {
+  if (stepType === "try" && i === 1) highlight = true;
+  if (stepType === "place" && i === 3) highlight = true;
+  if (stepType === "remove" && i === 5) highlight = true;
 }
 
         return (

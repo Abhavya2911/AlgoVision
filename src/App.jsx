@@ -17,6 +17,8 @@ import { bfsSteps } from "./algorithms/bfs";
 import { dfsSteps } from "./algorithms/dfs";
 import { knapsackSteps } from "./algorithms/knapsack";
 import DPTable from "./components/DPTable";
+import { nQueensSteps } from "./algorithms/nqueens";
+import NQueensBoard from "./components/NQueensBoard";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -32,6 +34,7 @@ const [isDirected, setIsDirected] = useState(false);
 const [weights, setWeights] = useState([]);
 const [values, setValues] = useState([]);
 const [capacity, setCapacity] = useState(0);
+const [nQueensSize, setNQueensSize] = useState(4);
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -85,6 +88,17 @@ else if (algorithm === "knapsack") {
 result = {
   steps: knapsackSteps([...weights], [...values], capacity),
   complexity: "O(n * W)"
+};
+}
+else if (algorithm === "nqueens") {
+  if (!nQueensSize) {
+  alert("Please set N first!");
+  return;
+}
+
+result = {
+  steps: nQueensSteps(nQueensSize),
+  complexity: "O(N!)"
 };
 }
 
@@ -163,7 +177,8 @@ sidebar={
   setDirectedGraph={setIsDirected}
     setWeights={setWeights}
   setValues={setValues}
-  setCapacity={setCapacity}  
+  setCapacity={setCapacity} 
+  setNQueensSize={setNQueensSize} 
 />
 }
       
@@ -208,7 +223,9 @@ center={
   <DPTable step={step} />
 ): (algorithm === "bfs" || algorithm === "dfs") ? (
   <GraphVisualizer step={step} graph={graph} directed={isDirected}/>
-) : (
+) : algorithm === "nqueens" ? (
+  <NQueensBoard step={step} />
+): (
   <ArrayVisualizer
     array={safeArray}
     active={safeActive}

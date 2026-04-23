@@ -1,13 +1,17 @@
 import InputPanel from "./InputPanel";
 import GraphInput from "./GraphInput";
 import KnapsackInput from "./KnapsackInput";
+import NQueensInput from "./NQueensInput";
 
-export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity }) {
+export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity, setNQueensSize }) {
   return (
     <div>
       <h2>DAA Visualizer</h2>
 
-     {algorithm === "knapsack" ? (
+    {algorithm === "nqueens" ? (
+  <NQueensInput setN={setNQueensSize} />
+) : 
+     (algorithm === "knapsack" )? (
   <KnapsackInput
     setWeights={setWeights}
     setValues={setValues}
@@ -106,8 +110,8 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
 
 <h4>Backtracking</h4>
    <p
-   className={`algo-item ${algorithm=="N-Queens" ? "active" : ""}`}
-    onClick={()=> setAlgorithm("N-Queens")}
+   className={`algo-item ${algorithm=="nqueens" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("nqueens")}
   >
     N-Queens
       </p>
