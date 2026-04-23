@@ -15,6 +15,8 @@ import ColorLegend from "./components/ColorLegend";
 import GraphVisualizer from "./components/GraphVisualizer";
 import { bfsSteps } from "./algorithms/bfs";
 import { dfsSteps } from "./algorithms/dfs";
+import { knapsackSteps } from "./algorithms/knapsack";
+import DPTable from "./components/DPTable";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -27,6 +29,9 @@ const [complexity, setComplexity] = useState("");
 const [graph, setGraph] = useState({});
 const [startNode, setStartNode] = useState("");
 const [isDirected, setIsDirected] = useState(false);
+const [weights, setWeights] = useState([]);
+const [values, setValues] = useState([]);
+const [capacity, setCapacity] = useState(0);
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -70,6 +75,17 @@ else if (algorithm === "dfs") {
     steps: dfsSteps(graph, startNode),
     complexity: "O(V + E)"
   };
+}
+else if (algorithm === "knapsack") {
+  if (!weights.length || !values.length || !capacity) {
+  alert("Please set knapsack input first!");
+  return;
+}
+
+result = {
+  steps: knapsackSteps([...weights], [...values], capacity),
+  complexity: "O(n * W)"
+};
 }
 
   setSteps(result.steps);
@@ -144,7 +160,10 @@ sidebar={
   algorithm={algorithm}
   setGraph={setGraph}
   setStartNode={setStartNode}
-  setDirectedGraph={setIsDirected}   // 🔥 FIX
+  setDirectedGraph={setIsDirected}
+    setWeights={setWeights}
+  setValues={setValues}
+  setCapacity={setCapacity}  
 />
 }
       
@@ -185,7 +204,9 @@ center={
       range={step.range}
     />
   </div>
-) : (algorithm === "bfs" || algorithm === "dfs") ? (
+) :algorithm=="knapsack" ?(
+  <DPTable step={step} />
+): (algorithm === "bfs" || algorithm === "dfs") ? (
   <GraphVisualizer step={step} graph={graph} directed={isDirected}/>
 ) : (
   <ArrayVisualizer

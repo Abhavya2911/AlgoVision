@@ -1,21 +1,27 @@
 import InputPanel from "./InputPanel";
 import GraphInput from "./GraphInput";
+import KnapsackInput from "./KnapsackInput";
 
-export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph }) {
+export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity }) {
   return (
     <div>
       <h2>DAA Visualizer</h2>
 
-      {algorithm === "bfs" || algorithm === "dfs" ? (
-  <GraphInput 
-  setGraph={setGraph} 
-  setDirectedGraph={setDirectedGraph}
-  setStartNode={setStartNode} 
+     {algorithm === "knapsack" ? (
+  <KnapsackInput
+    setWeights={setWeights}
+    setValues={setValues}
+    setCapacity={setCapacity}
+  />
+) : (algorithm === "bfs" || algorithm === "dfs") ? (
+  <GraphInput
+    setGraph={setGraph}
+    setStartNode={setStartNode}
+    setDirectedGraph={setDirectedGraph}
   />
 ) : (
   <InputPanel setArray={setArray} />
 )}
-
       <hr />
 
      <h4>Sorting</h4>
@@ -88,6 +94,25 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
 >
   DFS
 </p>
+
+ <h4>DP</h4>
+
+ <p
+   className={`algo-item ${algorithm=="knapsack" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("knapsack")}
+  >
+    0/1 Knapsack
+  </p>
+
+<h4>Backtracking</h4>
+   <p
+   className={`algo-item ${algorithm=="N-Queens" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("N-Queens")}
+  >
+    N-Queens
+      </p>
  </div>
+
+
   );
 }
