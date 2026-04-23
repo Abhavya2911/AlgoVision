@@ -56,6 +56,16 @@ dfs: [
   "go to first neighbor",
   "repeat recursively",
   "backtrack when no neighbor"
+],
+
+knapsack: [
+  "initialize dp table",
+  "for each item i",
+  "for each capacity w",
+  "if weight <= w",
+  "take max(include, exclude)",
+  "else copy above value",
+  "final answer dp[n][W]"
 ]
 
   };
@@ -105,6 +115,12 @@ dfs: [
   if (stepType === "visit" && i === 1) highlight = true;
 }
 
+    if (algorithm === "knapsack") {
+  if (stepType === "choice" && i === 4) highlight = true;
+  if (stepType === "skip" && i === 5) highlight = true;
+  if (stepType === "result" && i === 6) highlight = true;
+}
+
         return (
           <div
             key={i}
@@ -121,6 +137,8 @@ dfs: [
           </div>
         );
       })}
+
+
     </div>
   );
 }
