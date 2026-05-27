@@ -21,6 +21,8 @@ import { nQueensSteps } from "./algorithms/nqueens";
 import NQueensBoard from "./components/NQueensBoard";
 import { lcsSteps } from "./algorithms/lcs";
 import LCSInput from "./components/LCSInput";
+import { lisSteps } from "./algorithms/lis";
+import LISVisualizer from "./components/LISVisualizer";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -114,6 +116,17 @@ result = {
   result = {
     steps: lcsSteps(string1, string2),
     complexity: "O(n × m)"
+  };
+}else if (algorithm === "lis") {
+
+  if (!array.length) {
+    alert("Enter array first!");
+    return;
+  }
+
+  result = {
+    steps: lisSteps([...array]),
+    complexity: "O(n²)"
   };
 }
 
@@ -242,7 +255,11 @@ center={
   <GraphVisualizer step={step} graph={graph} directed={isDirected}/>
 ) : algorithm === "nqueens" ? (
   <NQueensBoard step={step} />
-): (
+): algorithm === "lis" ? (
+
+  <LISVisualizer step={step} />
+
+) :(
   <ArrayVisualizer
     array={safeArray}
     active={safeActive}

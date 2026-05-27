@@ -85,6 +85,13 @@ lcs: [
   "else take max(top, left)",
   "repeat for all cells",
   "answer is dp[n][m]"
+],
+lis: [
+  "initialize dp with 1",
+  "compare arr[j] < arr[i]",
+  "update dp[i]",
+  "repeat for all pairs",
+  "take maximum dp value"
 ]
 
   };
@@ -154,6 +161,17 @@ if (algorithm === "lcs") {
     highlight = true;
 
   if (stepType === "result" && i === 6)
+    highlight = true;
+}
+if (algorithm === "lis") {
+
+  if (stepType === "compare" && i === 1)
+    highlight = true;
+
+  if (stepType === "update" && i === 2)
+    highlight = true;
+
+  if (stepType === "result" && i === 4)
     highlight = true;
 }
         return (
