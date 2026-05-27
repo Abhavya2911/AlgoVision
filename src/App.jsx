@@ -19,6 +19,8 @@ import { knapsackSteps } from "./algorithms/knapsack";
 import DPTable from "./components/DPTable";
 import { nQueensSteps } from "./algorithms/nqueens";
 import NQueensBoard from "./components/NQueensBoard";
+import { lcsSteps } from "./algorithms/lcs";
+import LCSInput from "./components/LCSInput";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -35,6 +37,8 @@ const [weights, setWeights] = useState([]);
 const [values, setValues] = useState([]);
 const [capacity, setCapacity] = useState(0);
 const [nQueensSize, setNQueensSize] = useState(4);
+const [string1, setString1] = useState("");
+const [string2, setString2] = useState("");
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -100,6 +104,17 @@ result = {
   steps: nQueensSteps(nQueensSize),
   complexity: "O(N!)"
 };
+}else if (algorithm === "lcs") {
+
+  if (!string1 || !string2) {
+    alert("Set LCS input first!");
+    return;
+  }
+
+  result = {
+    steps: lcsSteps(string1, string2),
+    complexity: "O(n × m)"
+  };
 }
 
   setSteps(result.steps);
@@ -179,6 +194,8 @@ sidebar={
   setValues={setValues}
   setCapacity={setCapacity} 
   setNQueensSize={setNQueensSize} 
+  setString1={setString1}
+setString2={setString2}
 />
 }
       
@@ -219,7 +236,7 @@ center={
       range={step.range}
     />
   </div>
-) :algorithm=="knapsack" ?(
+) :(algorithm=="knapsack" || algorithm=="lcs")?(
   <DPTable step={step} />
 ): (algorithm === "bfs" || algorithm === "dfs") ? (
   <GraphVisualizer step={step} graph={graph} directed={isDirected}/>

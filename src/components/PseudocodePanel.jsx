@@ -76,6 +76,15 @@ nqueens: [
   "recurse to next row",
   "if fails → backtrack",
   "repeat until solution"
+],
+lcs: [
+  "initialize dp table",
+  "compare characters",
+  "if characters match",
+  "take diagonal + 1",
+  "else take max(top, left)",
+  "repeat for all cells",
+  "answer is dp[n][m]"
 ]
 
   };
@@ -136,7 +145,17 @@ if (algorithm === "nqueens") {
   if (stepType === "place" && i === 3) highlight = true;
   if (stepType === "remove" && i === 5) highlight = true;
 }
+if (algorithm === "lcs") {
 
+  if (stepType === "match" && i === 3)
+    highlight = true;
+
+  if (stepType === "nomatch" && i === 4)
+    highlight = true;
+
+  if (stepType === "result" && i === 6)
+    highlight = true;
+}
         return (
           <div
             key={i}

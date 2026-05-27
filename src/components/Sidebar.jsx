@@ -2,8 +2,9 @@ import InputPanel from "./InputPanel";
 import GraphInput from "./GraphInput";
 import KnapsackInput from "./KnapsackInput";
 import NQueensInput from "./NQueensInput";
+import LCSInput from "./LCSInput";
 
-export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity, setNQueensSize }) {
+export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity, setNQueensSize ,setString1,setString2}) {
   return (
     <div>
       <h2>DAA Visualizer</h2>
@@ -23,7 +24,12 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
     setStartNode={setStartNode}
     setDirectedGraph={setDirectedGraph}
   />
-) : (
+) : (algorithm === "lcs") ? (
+  <LCSInput
+    setString1={setString1}
+    setString2={setString2}
+  />
+) :(
   <InputPanel setArray={setArray} />
 )}
       <hr />
@@ -92,6 +98,27 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
     0/1 Knapsack
   </p>
 
+  <p
+   className={`algo-item ${algorithm=="mcm" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("mcm")}
+  >
+    MCM
+  </p>
+
+  <p
+   className={`algo-item ${algorithm=="lcs" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("lcs")}
+  >
+    LCS
+  </p>
+
+     <p
+   className={`algo-item ${algorithm=="lis" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("lis")}
+  >
+    LIS
+  </p>
+
 <h4>Backtracking</h4>
    <p
    className={`algo-item ${algorithm=="nqueens" ? "active" : ""}`}
@@ -99,6 +126,14 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
   >
     N-Queens
       </p>
+
+      <p
+   className={`algo-item ${algorithm=="sudoku" ? "active" : ""}`}
+    onClick={()=> setAlgorithm("sudoku")}
+  >
+    Sudoku Solver
+      </p>
+
  </div>
 
 
