@@ -67,22 +67,6 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
   Binary Search
 </p>
 
-<h4>Trees</h4>
-
-<p
-  className={`algo-item ${algorithm === "bst" ? "active" : ""}`}
-  onClick={() => setAlgorithm("bst")}
->
-  BST
-</p>
-
-<p
-  className={`algo-item ${algorithm === "avl" ? "active" : ""}`}
-  onClick={() => setAlgorithm("avl")}
->
-  AVL
-</p>
-
 <h4>Graphs</h4>
 
 <p

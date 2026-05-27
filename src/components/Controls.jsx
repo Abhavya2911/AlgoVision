@@ -20,8 +20,8 @@ export default function Controls({
         <label>Speed: </label>
         <input
           type="range"
-          min="1500"
-          max="3000"
+          min="500"
+          max="1500"
           step="100"
           value={speed}
           onChange={(e) => setSpeed(Number(e.target.value))}

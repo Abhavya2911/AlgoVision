@@ -25,7 +25,7 @@ export default function App() {
   const [steps, setSteps] = useState([]);
   const [i, setI] = useState(0);
 const [intervalId, setIntervalId] = useState(null);
-const [speed, setSpeed] = useState(2000);
+const [speed, setSpeed] = useState(800);
 const [algorithm, setAlgorithm] = useState("merge");
 const [complexity, setComplexity] = useState("");
 const [graph, setGraph] = useState({});
@@ -198,7 +198,7 @@ center={
       border: "1px solid #444",
       borderRadius: "8px"
     }}>
-      {step.message || "Click Start"}
+      {step.message || "Click Start button given below"}
     </div>
     
     {algorithm === "merge" ? (
