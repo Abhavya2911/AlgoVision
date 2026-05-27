@@ -92,6 +92,15 @@ lis: [
   "update dp[i]",
   "repeat for all pairs",
   "take maximum dp value"
+],
+mcm: [
+  "initialize dp table",
+  "choose chain length",
+  "try all partitions k",
+  "calculate multiplication cost",
+  "update minimum cost",
+  "repeat for all ranges",
+  "answer is dp[1][n-1]"
 ]
 
   };
@@ -172,6 +181,17 @@ if (algorithm === "lis") {
     highlight = true;
 
   if (stepType === "result" && i === 4)
+    highlight = true;
+}
+if (algorithm === "mcm") {
+
+  if (stepType === "partition" && i === 2)
+    highlight = true;
+
+  if (stepType === "update" && i === 4)
+    highlight = true;
+
+  if (stepType === "result" && i === 6)
     highlight = true;
 }
         return (

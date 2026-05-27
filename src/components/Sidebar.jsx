@@ -3,8 +3,9 @@ import GraphInput from "./GraphInput";
 import KnapsackInput from "./KnapsackInput";
 import NQueensInput from "./NQueensInput";
 import LCSInput from "./LCSInput";
+import MCMInput from "./MCMInput";
 
-export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity, setNQueensSize ,setString1,setString2}) {
+export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, setStartNode, setDirectedGraph, setWeights, setValues, setCapacity, setNQueensSize ,setString1,setString2, setMcmArray}) {
   return (
     <div>
       <h2>DAA Visualizer</h2>
@@ -29,7 +30,9 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
     setString1={setString1}
     setString2={setString2}
   />
-) :(
+) : algorithm === "mcm" ? (
+  <MCMInput setMcmArray={setMcmArray} />
+):(
   <InputPanel setArray={setArray} />
 )}
       <hr />

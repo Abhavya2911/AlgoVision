@@ -23,6 +23,8 @@ import { lcsSteps } from "./algorithms/lcs";
 import LCSInput from "./components/LCSInput";
 import { lisSteps } from "./algorithms/lis";
 import LISVisualizer from "./components/LISVisualizer";
+import { mcmSteps } from "./algorithms/mcm";
+import MCMVisualizer from "./components/MCMVisualizer";
 
 export default function App() {
   const [array, setArray] = useState([4, 2, 7, 1, 5, 3]);
@@ -41,6 +43,7 @@ const [capacity, setCapacity] = useState(0);
 const [nQueensSize, setNQueensSize] = useState(4);
 const [string1, setString1] = useState("");
 const [string2, setString2] = useState("");
+const [mcmArray, setMcmArray] = useState([]);
 
 const start = () => {
   let result = { steps: [], complexity: "" };
@@ -128,6 +131,17 @@ result = {
     steps: lisSteps([...array]),
     complexity: "O(n²)"
   };
+}else if (algorithm === "mcm") {
+   
+  if (!mcmArray.length) {
+    alert("Set MCM input first!");
+    return;
+  }
+
+  result = {
+    steps: mcmSteps(mcmArray),
+    complexity: "O(n³)"
+  };
 }
 
   setSteps(result.steps);
@@ -209,6 +223,7 @@ sidebar={
   setNQueensSize={setNQueensSize} 
   setString1={setString1}
 setString2={setString2}
+setMcmArray={setMcmArray}
 />
 }
       
@@ -259,7 +274,11 @@ center={
 
   <LISVisualizer step={step} />
 
-) :(
+) : algorithm === "mcm" ? (
+   
+  <MCMVisualizer step={step} />
+
+):(
   <ArrayVisualizer
     array={safeArray}
     active={safeActive}
