@@ -130,13 +130,6 @@ export default function Sidebar({ setArray, setAlgorithm, algorithm, setGraph, s
     N-Queens
       </p>
 
-      <p
-   className={`algo-item ${algorithm=="sudoku" ? "active" : ""}`}
-    onClick={()=> setAlgorithm("sudoku")}
-  >
-    Sudoku Solver
-      </p>
-
  </div>
 
 
