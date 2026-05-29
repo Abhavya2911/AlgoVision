@@ -40,7 +40,6 @@ export default function GraphInput({ setGraph, setStartNode, setDirectedGraph })
     <div style={{ marginTop: "20px" }}>
       <h3>Graph Input</h3>
 
-      {/* EDGES INPUT */}
       <input
         type="text"
         placeholder="Edges (A-B, A-C, B-D)"
@@ -57,7 +56,6 @@ export default function GraphInput({ setGraph, setStartNode, setDirectedGraph })
         }}
       />
 
-      {/* START NODE */}
       <input
         type="text"
         placeholder="Start Node (A)"
@@ -74,7 +72,6 @@ export default function GraphInput({ setGraph, setStartNode, setDirectedGraph })
         }}
       />
 
-      {/* DIRECTED BUTTON */}
       <button
         onClick={() => setDirected(!directed)}
         style={{
@@ -91,7 +88,6 @@ export default function GraphInput({ setGraph, setStartNode, setDirectedGraph })
         {directed ? "Directed Graph" : "Undirected Graph"}
       </button>
 
-      {/* BUILD BUTTON */}
       <button
         onClick={buildGraph}
         style={{

@@ -7,7 +7,7 @@ export default function LISVisualizer({ step }) {
 
       <h3>{step.message}</h3>
 
-      {/* ORIGINAL ARRAY */}
+      
       <div style={{ marginBottom: "20px" }}>
 
         <h4 style={{ color: "#38bdf8" }}>Array</h4>
@@ -48,7 +48,7 @@ export default function LISVisualizer({ step }) {
         </div>
       </div>
 
-      {/* DP ARRAY */}
+      
       <div>
 
         <h4 style={{ color: "#22c55e" }}>DP Array</h4>

@@ -11,7 +11,7 @@ export default function MCMVisualizer({ step }) {
 
       <h3>{step.message}</h3>
 
-      {/* MATRIX INFO */}
+     
       <div style={{
         marginBottom: "20px",
         color: "#38bdf8",
@@ -20,7 +20,7 @@ export default function MCMVisualizer({ step }) {
         Dimensions: {step.dims.join(" → ")}
       </div>
 
-      {/* DP TABLE */}
+     
       <div style={{
         display: "inline-block",
         minWidth: "max-content"
@@ -78,7 +78,7 @@ export default function MCMVisualizer({ step }) {
 
       </div>
 
-      {/* CURRENT PARTITION */}
+     
       {step.k !== undefined && (
 
         <div style={{

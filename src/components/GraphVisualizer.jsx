@@ -1,7 +1,6 @@
 
 export default function GraphVisualizer({ step, graph, directed }) {
 
-  // 🔥 FIX: use fallback graph
   const graphData = step?.graph || graph || {};
 
   if (!graphData || Object.keys(graphData).length === 0) {
@@ -14,7 +13,7 @@ export default function GraphVisualizer({ step, graph, directed }) {
   const centerX = 250;
   const centerY = 200;
 
-  // 🔥 Position nodes in circle
+  
   const positions = {};
   nodes.forEach((node, i) => {
     const angle = (2 * Math.PI * i) / nodes.length;
@@ -47,7 +46,7 @@ export default function GraphVisualizer({ step, graph, directed }) {
     </marker>
   </defs>
 
-        {/* 🔥 EDGES (FIXED HERE) */}
+       
         {nodes.map((node) =>
   Array.isArray(graphData[node])
   ? graphData[node].map((neighbor, idx) => {
@@ -55,7 +54,7 @@ export default function GraphVisualizer({ step, graph, directed }) {
       const dy = positions[neighbor].y - positions[node].y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      const offsetX = (dx / dist) * 20; // node radius
+      const offsetX = (dx / dist) * 20;
       const offsetY = (dy / dist) * 20;
 
       return (
@@ -74,15 +73,15 @@ export default function GraphVisualizer({ step, graph, directed }) {
   : null
 )}
 
-        {/* 🔥 NODES */}
+        
         {nodes.map((node, i) => {
           const isCurrent = node === step?.node;
           const isVisited = step?.visited?.includes(node);
 
           let fill = "#1e293b";
 
-          if (isCurrent) fill = "#38bdf8";      // current node
-          else if (isVisited) fill = "#22c55e"; // visited
+          if (isCurrent) fill = "#38bdf8";      
+          else if (isVisited) fill = "#22c55e"; 
 
           return (
             <g key={i}>
@@ -107,14 +106,14 @@ export default function GraphVisualizer({ step, graph, directed }) {
         })}
       </svg>
 
-      {/* 🔥 QUEUE */}
+      
       {step?.queue && (
         <div style={{ color: "#facc15" }}>
           Queue: {step.queue.join(" → ")}
         </div>
       )}
 
-      {/* 🔥 STACK */}
+     
       {step?.stack && (
         <div style={{ color: "#ef4444" }}>
           Stack: {step.stack.join(" → ")}

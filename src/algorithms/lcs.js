@@ -46,7 +46,7 @@ export function lcsSteps(str1, str2) {
         });
       }
     }
-  }  // 🔥 BUILD LCS STRING
+  }  
   let lcs = "";
 
   let i = n;

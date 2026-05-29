@@ -12,7 +12,6 @@ export default function DPTable({ step }) {
 
       <h3>{step.message}</h3>
 
-      {/* 🔥 LCS STRING LABELS */}
       {step.str1 && (
         <div style={{ marginBottom: "10px", color: "#38bdf8" }}>
           String 1: {step.str1}
@@ -28,7 +27,6 @@ export default function DPTable({ step }) {
   display: "inline-block",
   minWidth: "max-content"
 }}>
-      {/* 🔥 DP TABLE */}
       {step.table.map((row, rowIndex) => (
 
         <div
@@ -47,7 +45,6 @@ export default function DPTable({ step }) {
 
             let bg = "#1e293b";
 
-            // 🔥 LCS COLORS
             if (isActive) {
 
               if (step.type === "match") {
@@ -58,7 +55,6 @@ export default function DPTable({ step }) {
                 bg = "#ef4444";
               }
 
-              // 🔥 KNAPSACK COLORS
               else if (step.type === "choice") {
                 bg = "#38bdf8";
               }
